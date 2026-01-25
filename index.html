@@ -9,7 +9,6 @@
             background: #00BFFF;
             padding: 20px;
         }
-
         .box {
             background: #ffffff;
             color: #000;
@@ -17,17 +16,14 @@
             margin-bottom: 20px;
             border-radius: 8px;
         }
-
         button {
             padding: 5px 10px;
             cursor: pointer;
         }
-
         textarea {
             width: 100%;
             height: 60px;
         }
-
         input {
             width: 100%;
             padding: 5px;
@@ -36,70 +32,77 @@
 </head>
 <body>
 
-   <h1>Меним Сайтым</h1> 
-   <h1>Зайнулла Жангирхан</h1> 
+<h1>Меним Сайтым</h1> 
+<h1>Зайнулла Жангирхан</h1> 
 
-   <div class="box">
-        <h2>Киру саны</h2>
-        <p>Сайтты ашты: <span id="counter">0</span> рет</p>
-   </div>
+<div class="box">
+    <h2>Киру саны</h2>
+    <p>Сайтты ашты: <span id="counter">—</span> рет</p>
+</div>
 
-   <div class="box">
-        <h2>Сообщение калдыру</h2>
-        <h3>сайтты тагы не косуга болады\/</h3>
+<div class="box">
+    <h2>Сообщение калдыру</h2>
+    <h3>сайтты тагы не косуга болады?\/</h3>
 
-                <input id="name" placeholder="Атынды жаз ыы">
-        <br><br>
+    <input id="name" placeholder="Атынды жаз">
+    <br><br>
 
-        <textarea id="message" placeholder="Сообщение жаз..."></textarea>
-        <br><br>
-        <button onclick="addMessage()">Жберу</button>
+    <textarea id="message" placeholder="Сообщение жаз..."></textarea>
+    <br><br>
 
-        <h3>Сообщения:</h3>
-        <ul id="messages"></ul>
-   </div>
+    <button onclick="addMessage()">Жиберу</button>
 
-   <script>
-               let visits = localStorage.getItem("visits");
+    <h3>Сообщения:</h3>
+    <ul id="messages"></ul>
+</div>
 
-        if (visits === null) {
-            visits = 1;
-        } else {
-            visits = Number(visits) + 1;
-        }
+<h3>сайт 23 кантар 26шы жылы курылды</h3>
 
-        localStorage.setItem("visits", visits);
-        document.getElementById("counter").textContent = visits;
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-               let messages = JSON.parse(localStorage.getItem("messages")) || [];
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjiJb3jR3GNkvjQH7c__ord9h2KKGJNAU",
+    authDomain: "schoolproject-77573.firebaseapp.com",
+    projectId: "schoolproject-77573",
+    storageBucket: "schoolproject-77573.firebasestorage.app",
+    messagingSenderId: "845334736978",
+    appId: "1:845334736978:web:b1d0d98855efaab88caf8b"
+  };
 
-        function showMessages() {
-            let list = document.getElementById("messages");
-            list.innerHTML = "";
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const messagesRef = collection(db, "messages");
 
-            for (let msg of messages) {
-                let li = document.createElement("li");
-                li.textContent = msg;
-                list.appendChild(li);
-            }
-        }
+  const list = document.getElementById("messages");
 
-                function addMessage() {
-            let name = document.getElementById("name").value;
-            let text = document.getElementById("message").value;
+   onSnapshot(messagesRef, (snapshot) => {
+    list.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      const li = document.createElement("li");
+      li.textContent = data.name + ": " + data.text;
+      list.appendChild(li);
+    });
+  });
 
-            if (name !== "" && text !== "") {
-                messages.push(name + ": " + text);
-                localStorage.setItem("messages", JSON.stringify(messages));
-                document.getElementById("message").value = "";
-                showMessages();
-            }
-        }
+   window.addMessage = async function () {
+    const name = document.getElementById("name").value;
+    const text = document.getElementById("message").value;
 
-        showMessages();
-   </script>
+    if (name && text) {
+      await addDoc(messagesRef, { name, text });
+      document.getElementById("message").value = "";
+    }
+  };
 
-   <h3>сайт 23 кантар 26шы жылы курылды</h3>
+    let visits = localStorage.getItem("visits");
+  visits = visits ? Number(visits) + 1 : 1;
+  localStorage.setItem("visits", visits);
+  document.getElementById("counter").textContent = visits;
+</script>
 
 </body>
 </html>
+
