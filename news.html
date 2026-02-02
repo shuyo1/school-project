@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости школы - Mektep Times</title>
+    <style>
+        :root {
+            --bbc-red: #bb1919;
+            --text-dark: #212121;
+            --bg-gray: #f6f6f6;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+        }
+
+        /* Шапка */
+        header {
+            background: var(--bbc-red);
+            color: white;
+            padding: 10px 10%;
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 { margin: 0; font-size: 24px; letter-spacing: 1px; }
+
+        /* Навигация */
+        nav {
+            background: white;
+            padding: 12px 10%;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: bold;
+            margin-right: 25px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        nav a:hover { color: var(--bbc-red); }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            border-left: 4px solid var(--bbc-red);
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Сетка новостей */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* Карточка новости */
+        .news-card {
+            background: white;
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--bbc-red);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 180px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-content {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .news-category {
+            color: var(--bbc-red);
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .news-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            line-height: 1.3;
+        }
+
+        .news-content p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .news-footer {
+            font-size: 11px;
+            color: #888;
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MEKTEP TIMES</h1>
+</header>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="news.html" style="color: var(--bbc-red);">Новости</a>
+    <a href="index.html">Форум</a>
+</nav>
+
+<div class="container">
+    <div class="page-title">
+        <h2>Лента новостей</h2>
+    </div>
+
+    <div class="news-grid">
+        
+        <article class="news-card">
+            <div class="news-image" style="background-image: url('https://picsum.photos/400/250?random=1');"></div>
+            <div class="news-content">
+                <span class="news-category">Образование</span>
+                <h3>Новая IT-лаборатория открыта в нашем корпусе</h3>
+                <p>Современное оборудование позволит ученикам изучать программирование и робототехнику на новом уровне...</p>
+            </div>
+            <div class="news-footer">
+                2 ФЕВРАЛЯ 2026 | ЗАЙНУЛЛА Ж.
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-image" style="background-image: url('https://picsum.photos/400/250?random=2');"></div>
+            <div class="news-content">
+                <span class="news-category">Спорт</span>
+                <h3>Победа футбольной команды</h3>
+                <p>Наши ребята заняли первое место в городском турнире. Поздравляем чемпионов!</p>
+            </div>
+            <div class="news-footer">
+                1 ФЕВРАЛЯ 2026 | СПОРТКОМИТЕТ
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-image" style="background-image: url('https://picsum.photos/400/250?random=3');"></div>
+            <div class="news-content">
+                <span class="news-category">Мероприятия</span>
+                <h3>Подготовка к весеннему балу</h3>
+                <p>Начинается регистрация участников на ежегодный школьный бал. Репетиции пройдут в актовом зале.</p>
+            </div>
+            <div class="news-footer">
+                31 ЯНВАРЯ 2026 | АДМИНИСТРАЦИЯ
+            </div>
+        </article>
+
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 Mektep Times. Все права защищены.
+</footer>
+
+</body>
+</html>
